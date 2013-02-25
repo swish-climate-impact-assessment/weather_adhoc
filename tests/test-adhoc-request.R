@@ -15,22 +15,17 @@ require(swishdbtools)
 ch <- connect2postgres2("ewedb")
 
 # get scope
-location <- read.csv("")
-head(location)
-location <- location$column_name
-  #c('12 main street, mossman, qld', "mills and eggleston road, acton, canberra")
-for(locn in location)
-{
-  xy <- gGeoCode2(locn)
-print(xy)
-  
+location <- '20 balmain crescent acton'
+xy <- gGeoCode2(location)
+xy
 
-# 
-# r <- readGDAL(sprintf("PG:host=115.146.84.135 port=5432 dbname='ewedb' user='gislibrary' password='%s' schema='awap_grids' table=maxave_20130108", pwd))
-# image(r)
-# with(xy, points(as.numeric(as.character(long)), as.numeric(as.character(lat))))
+# visualise some data
+pwd <- getPassword(remote = T)
+r <- readGDAL(sprintf("PG:host=115.146.84.135 port=5432 dbname='ewedb' user='gislibrary' password='%s' schema='awap_grids' table=maxave_20130108", pwd))
+image(r)
+with(xy, points(as.numeric(as.character(long)), as.numeric(as.character(lat))))
 
-measures <- c("maxave","minave", "totals", "vprph09", "vprph15")
+measures <- c("maxave","minave")
 dates <- as.character(seq(as.Date('2013-01-01'), as.Date('2013-01-27'), 1))
 #rm(dat)
 for(date_j in dates)
@@ -48,7 +43,7 @@ for(date_j in dates)
     } else {
       dat <- rbind(dat, dbGetQuery(ch, sql))
     }
-  
+    
   }
 }
 
@@ -62,6 +57,5 @@ dat <- arrange(dat,  date, measure)
 dat <- as.data.frame(cast(dat, location + date ~ measure, value = "value"))
 dat$date <- as.Date(dat$date)
 # str(dat)
-# with(dat, plot(date, maxave, "l"))
-  write.csv(dat, paste(locn, ".csv", sep =""))
-}
+with(dat, plot(date, maxave, "l", ylim = c(0,40)))
+with(dat, lines(date, minave))
