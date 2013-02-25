@@ -1,8 +1,11 @@
-require(plyr)
+if(!require(plyr)) install.packages("plyr"); require(plyr)
 # connect
 download.file("http://swish-climate-impact-assessment.github.com/tools/swishdbtools/swishdbtools_1.1.zip", "~/swishdbtools_1.1.zip", mode = "wb")
 install.packages("~/swishdbtools_1.1.zip", repos = NULL)
 require(swishdbtools)
+download.file("http://ivanhanigan.github.com/gisviz/gisviz_1.0.zip", "~/gisviz_1.0.zip", mode = "wb")
+install.packages("~/gisviz_1.0.zip", repos = NULL)
+
 ewedb <- connect2postgres2('ewedb')
 
 # newnode variable names
@@ -25,7 +28,7 @@ ndvi,ndviave,month
 "
 vars<-read.csv(textConnection(vars))
 
-# subset CCDs
+# enter your locations
 cd_hilda <- read.table("cd_code_Hilda.txt", header = TRUE)
 str(cd_hilda)
 dbWriteTable(ewedb, "cd_hilda", cd_hilda, row.names = FALSE)

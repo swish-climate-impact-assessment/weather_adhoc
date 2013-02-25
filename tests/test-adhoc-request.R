@@ -4,11 +4,15 @@
 # get functions
 require(plyr)
 require(reshape)
+#require(devtools)
+#install_github("gisviz", username="ivanhanigan")
 require(gisviz)
 require(rgdal)
+#download.file("http://swish-climate-impact-assessment.github.com/tools/swishdbtools/swishdbtools_1.1_R_x86_64-pc-linux-gnu.tar.gz",
+#"~/swishdbtools_1.1_R_x86_64-pc-linux-gnu.tar.gz", mode = "wb")
+#install.packages("~/swishdbtools_1.1_R_x86_64-pc-linux-gnu.tar.gz", repos = NULL, type = "source")
 require(swishdbtools)
 ch <- connect2postgres2("ewedb")
-pwd <- getPassword()
 
 # get scope
 location <- read.csv("")
