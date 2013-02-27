@@ -51,7 +51,7 @@ dbSendQuery(ch, sql)
 ########
 # now work o nthe data
 sql_subset(ch, "abs_sla.nswsla06_points", limit = 1, eval = T)
-measures <- c("maxave","minave")
+measures <- c("maxave","minave", "solarave","totals","vprph09","vprph15")
 dates <- as.character(seq(as.Date('2013-01-01'), as.Date('2013-01-27'), 1))
 #rm(dat)
 
