@@ -1,0 +1,33 @@
+#+TITLE:weather adhoc 
+#+AUTHOR: Ivan Hanigan
+#+email: ivan.hanigan@anu.edu.au
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [a4paper]
+#+LATEX: \tableofcontents
+-----
+
+* Introduction
+* init
+*** init-code
+#+name:init
+#+begin_src R :session *R* :tangle no :exports none :eval no
+  ################################################################
+  # name:init
+  require(ProjectTemplate)
+  create.project("asdf")
+  # move the subdirs up
+  
+#+end_src
+*** global-code
+#+name:global
+#+begin_src R :session *R* :tangle config/global.dcf :exports none :eval no
+data_loading: off
+cache_loading: on
+munging: on
+logging: off
+load_libraries: on
+libraries: reshape, plyr, ggplot2, stringr, lubridate, swishdbtools, gisviz
+as_factors: on
+data_tables: off
+#+end_src
+
